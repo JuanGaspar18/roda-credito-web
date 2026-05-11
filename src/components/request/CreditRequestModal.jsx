@@ -1,10 +1,11 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { User, Mail, Phone, MapPin, Send, X } from "lucide-react";
 
 import { createCreditRequest } from "../../api/request.api";
 
-const CreditRequestModal = ({ open, onClose, simulation }) => {
+const CreditRequestModal = ({ open, onClose, simulation, onSuccess }) => {
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({ first_name: "", last_name: "", email: "", phone: "", city: "" });
     if (!open) return null;
@@ -13,14 +14,14 @@ const CreditRequestModal = ({ open, onClose, simulation }) => {
         try {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if ( !emailRegex.test(form.email) ) {
-                alert( "Ingresa un correo válido.");
+                toast.error("Ingresa un correo válido.");
                 return;
             }
             if ( !/^[0-9]+$/.test(form.phone)) {
-                alert( "El teléfono solo debe contener números." );
+                toast.error("El teléfono solo debe contener números.");
                 return;
             }
-            if (form.phone.length < 10) { alert( "El teléfono debe tener mínimo 10 dígitos." );
+            if (form.phone.length < 10) { toast.error( "El teléfono debe tener mínimo 10 dígitos." );
                 return;
             }
 
@@ -39,13 +40,14 @@ const CreditRequestModal = ({ open, onClose, simulation }) => {
 
             const response = await createCreditRequest( payload );
             if (response.success) {
-                alert( "Solicitud enviada correctamente." );
+                toast.success("Solicitud enviada correctamente.");
                 setForm({ first_name: "", last_name: "", email: "", phone: "", city: "" });
+                onSuccess();
                 onClose();
             }
         } catch (error) {
             console.error(error);
-            alert( "Ocurrió un error al enviar la solicitud." );
+            toast.error("Ocurrió un error al enviar la solicitud.");
         } finally {
             setLoading(false);
         }
@@ -54,13 +56,13 @@ const CreditRequestModal = ({ open, onClose, simulation }) => {
     return (
         <div className=" fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/70 px-4 py-6 backdrop-blur-sm
 ">
-            <div className=" relative w-full max-w-3xl rounded-4xl border p-5 shadow-2xl max-h-[90vh] overflow-y-auto lg:p-10 " style={{ background: "#050505", borderColor: "rgba(212,255,0,0.12)" }} >
+            <div className=" relative w-full max-w-3xl rounded-4xl border p-5 shadow-2xl max-h-[90vh] overflow-y-auto lg:p-10 " style={{ background: "var(--color-surface)", borderColor: "var(--color-border)" }} >
                 <button onClick={onClose} className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full border transition-all hover:scale-105" style={{ borderColor: "var(--color-border)", background: "var(--color-surface-secondary)" }}>
                     <X size={18} />
                 </button>
                 <div className="mb-10">
                     <div className="flex items-center gap-3">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl" style={{ background: "rgba(212,255,0,0.12)", color: "var(--color-primary)" }} >
+                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl" style={{ background: "var(--gradient-card-highlight)", color: "var(--color-primary)" }} >
                             <Send size={20} />
                         </div>
                         <div>
@@ -85,7 +87,7 @@ const CreditRequestModal = ({ open, onClose, simulation }) => {
                             <MapPin size={16} />
                             <span>Ciudad</span>
                         </div>
-                        <select name="city" value={form.city} onChange={handleChange} className="w-full rounded-2xl border px-5 py-4 outline-none transition-all" style={{ background: "#090909", borderColor: "var(--color-border)", color: "white" }}>
+                        <select name="city" value={form.city} onChange={handleChange} className="w-full rounded-2xl border px-5 py-4 outline-none transition-all" style={{ background: "var(--color-surface-secondary)", borderColor: "var(--color-border)", color: "var(--color-text)" }}>
                             <option value="">
                                 Selecciona tu ciudad
                             </option>
@@ -180,9 +182,9 @@ const InputField = ({ icon, label, ...props }) => {
                 {...props}
                 className="w-full rounded-2xl border px-5 py-4 outline-none transition-all"
                 style={{
-                    background: "#090909",
+                    background: "var(--color-surface-secondary)",
                     borderColor: "var(--color-border)",
-                    color: "white"
+                    color: "var(--color-text)"
                 }}
             />
         </div>

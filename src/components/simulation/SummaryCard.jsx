@@ -4,8 +4,8 @@ const SummaryCard = ({ label, value }) => {
             <p className="text-sm" style={{ color:"var(--color-text-secondary)" }}>
                 {label}
             </p>
-            <h4 className="mt-3 text-xl font-semibold">
-                ${" "}{Number(value || 0).toLocaleString("es-CO")}
+            <h4 className="mt-3 text-body font-semibold">
+                ${" "}{Math.round(Number(value || 0)).toLocaleString("es-CO")}
             </h4>
         </div>
     );

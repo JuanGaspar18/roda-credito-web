@@ -4,7 +4,7 @@ const AmortizationPagination = ({ currentPage, totalPages, onPageChange }) => {
             <button onClick={() => onPageChange(currentPage - 1) } disabled={currentPage === 1} className="button-secondary">
                 Anterior
             </button>
-            <p className="text-sm">
+            <p className="text-extras">
                 Página
                 {" "}
                 {currentPage}

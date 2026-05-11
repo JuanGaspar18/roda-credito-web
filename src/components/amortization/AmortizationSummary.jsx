@@ -17,7 +17,7 @@ const SummaryItem = ({ label, value }) => {
             <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
                 {label}
             </p>
-            <h4 className="mt-3 text-2xl font-bold">
+            <h4 className="mt-3 text-lg font-bold">
                 {value}
             </h4>
         </div>

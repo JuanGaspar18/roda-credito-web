@@ -24,7 +24,7 @@ const CreditSummary = ({ summary }) => {
                 <p className=" text-sm uppercase tracking-[0.2em]">
                     Tu cuota mensual sería
                 </p>
-                <h2 className=" mt-4 text-5xl font-bold " style={{ color: "var(--color-primary)" }}>
+                <h2 className=" mt-4 text-display font-bold " style={{ color: "var(--color-primary)" }}>
                     $ {summary.monthly_payment.toLocaleString("es-CO")}
                 </h2>
                 <p className="mt-4 text-sm">
@@ -61,8 +61,8 @@ const CreditSummary = ({ summary }) => {
                         Cuota inicial + financiamiento
                     </p>
                 </div>
-                <h3 className=" text-3xl font-bold ">
-                    $ {summary.total_payment.toLocaleString("es-CO")}
+                <h3 className=" text-title2 font-bold ">
+                    ${Math.round(summary.total_payment).toLocaleString("es-CO")}
                 </h3>
             </div>
             <p className=" mt-6 text-xs leading-relaxed " style={{ color: "var(--color-text-secondary)" }}>

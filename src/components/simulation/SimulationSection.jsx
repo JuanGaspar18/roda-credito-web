@@ -6,16 +6,16 @@ const SimulationSection = ({ simulationResult, onSimulate }) => {
         <section className="py-28">
             <div className="container-primary">
                 <div className="mx-auto mb-16 max-w-3xl text-center">
-                    <div className=" mb-6 inline-flex rounded-full border px-5 py-2 text-sm font-medium " style={{ background: "var(--gradient-primary)", borderColor: "rgba(212,255,0,0.15)", color: "#D4FF00" }}>
+                    <div className=" mb-6 inline-flex rounded-full border px-5 py-2 text-sm font-medium " style={{ background: "var(--gradient-primary)", borderColor: "rgba(212,255,0,0.15)", color: "var(--color-accent-text)" }}>
                         ⚡ Simulador de crédito
                     </div>
-                    <h2 className="section-subtitle">
+                    <h2 className="text-display section-subtitle">
                         Calcula tu {" "}
                         <span style={{ color: "var(--color-primary)" }}>
                             financiamiento
                         </span>
                     </h2>
-                    <p className="section-description mt-6">
+                    <p className="text-subtitle section-description mt-6">
                         Configura los parámetros
                         de tu crédito y conoce
                         tu cuota mensual al instante.
