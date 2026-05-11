@@ -13,15 +13,45 @@ const CreditRequestModal = ({ open, onClose, simulation, onSuccess }) => {
     const handleSubmit = async () => {
         try {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if ( !emailRegex.test(form.email) ) {
+            const onlyLetters = /^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+$/;
+            const onlyNumbers = /^[0-9]+$/;
+            if (!form.first_name.trim()) {
+                toast.error("El nombre es obligatorio.");
+                return;
+            }
+
+            if (!onlyLetters.test(form.first_name)) {
+                toast.error("El nombre solo debe contener letras.");
+                return;
+            }
+
+            if (!form.last_name.trim()) {
+                toast.error("El apellido es obligatorio.");
+                return;
+            }
+
+            if (!onlyLetters.test(form.last_name)) {
+                toast.error("El apellido solo debe contener letras.");
+                return;
+            }
+
+            if (!emailRegex.test(form.email)) {
                 toast.error("Ingresa un correo válido.");
                 return;
             }
-            if ( !/^[0-9]+$/.test(form.phone)) {
+
+            if (!onlyNumbers.test(form.phone)) {
                 toast.error("El teléfono solo debe contener números.");
                 return;
             }
-            if (form.phone.length < 10) { toast.error( "El teléfono debe tener mínimo 10 dígitos." );
+
+            if (form.phone.length < 10) {
+                toast.error("El teléfono debe tener mínimo 10 dígitos.");
+                return;
+            }
+
+            if (!form.city) {
+                toast.error("Debes seleccionar una ciudad.");
                 return;
             }
 
