@@ -5,7 +5,7 @@ const AmortizationPagination = ({ currentPage, totalPages, onPageChange }) => {
                 Anterior
             </button>
             <p className="text-extras">
-                Página
+                Pág
                 {" "}
                 {currentPage}
                 {" "}
